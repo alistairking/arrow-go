@@ -153,12 +153,6 @@ func (w *Writer) Close() error {
 }
 
 func (w *Writer) Write(rec arrow.Record) (err error) {
-	defer func() {
-		if pErr := recover(); pErr != nil {
-			err = utils.FormatRecoveredError("arrow/ipc: unknown error while writing", pErr)
-		}
-	}()
-
 	incomingSchema := rec.Schema()
 
 	if !w.started {
