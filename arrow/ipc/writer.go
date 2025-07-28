@@ -195,6 +195,9 @@ func (w *Writer) Write(rec arrow.Record) (err error) {
 		return fmt.Errorf("arrow/ipc: could not encode record to payload: %w", err)
 	}
 
+	if w.pw == nil {
+		return fmt.Errorf("A6R DEBUG: PayloadWriter is nil")
+	}
 	return w.pw.WritePayload(data)
 }
 
